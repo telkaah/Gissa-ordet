@@ -1,12 +1,11 @@
 import LeaderboardIcon from '@mui/icons-material/Leaderboard';
-import { Typography } from '@mui/material';
+import {  Box, Divider, Stack, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import IconButton from '@mui/material/IconButton';
-import { useTheme } from '@mui/material/styles';
 import { React, useEffect, useState } from 'react';
 import { useAnswer } from '../hooks/useAnswer';
 import { useStatistics } from '../hooks/useStatistics';
@@ -14,7 +13,7 @@ import { useStatistics } from '../hooks/useStatistics';
 export default function StatsDialog(props) {
   const {statisticsOpen} = props;
   const [open, setOpen] = useState(false);
-  const {dayResult, statistics } = useStatistics();
+  const {dayResult, statistics, played, won, streak } = useStatistics();
   const { answer } = useAnswer();
 
   const handleClickOpen = () => {
@@ -51,27 +50,43 @@ export default function StatsDialog(props) {
         aria-labelledby="responsive-dialog-title"
       >
         <DialogContent>
-          <DialogContentText>
+          <DialogContentText sx={{textAlign:"center"}}>
             {
               dayResult &&
-              <>
+              <Box sx={{mb:3}}>
                 {
                   (dayResult[0] === "WIN") ?
-                    <Typography variant="h5">
+                    <Typography variant="h5" sx={{textAlign:"center"}}>
                         GRATTIS! Du klarade dagens ord!<br/>
                     </Typography>
                     :<>Tyvärr klarade du inte dagens ord</>
                 }
                 <Typography variant="body1">Dagens ord var: <b>{answer}</b></Typography>
                 Imorgon kommer ett nytt ord!
-              </>
+              </Box>
             }
             {
               statistics ? 
               <>
-                <br /><br />
-                <Typography variant="body1">Här ser du hur det gått tidigare</Typography>
-                {statistics.where}
+                <Typography variant="h5">Statistik</Typography>
+                <Stack direction="row"   justifyContent="center" alignItems="center" spacing={3} sx={{mt:2}}>
+                  <div>
+                    <Typography variant="h5">
+                      {Object.keys(statistics)?.length}
+                    </Typography>
+                    <Typography variant="body1">
+                      dagar spelat
+                    </Typography>
+                  </div>
+                  <div>
+                    <Typography variant="h5">
+                      {Math.trunc(won/played*100)}%
+                    </Typography>
+                    <Typography variant="body1">
+                      vinst
+                    </Typography>
+                  </div>                                                
+                </Stack>
               </>
               :
               <>

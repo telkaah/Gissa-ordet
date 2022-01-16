@@ -7,6 +7,7 @@ import TopAppBar from './appbar';
 import Guess from './game-components/guess';
 import Keyboard from './game-components/keyboard/keyboard';
 import Message from './game-components/message';
+import { useStatistics } from '../hooks/useStatistics';
 
 export default function Game() {
     var {answer} = useAnswer();
@@ -15,6 +16,7 @@ export default function Game() {
     const [guess, setGuess] = useState("");
     const [messageOpen, setMessageOpen] = useState(false);
     const [message, setMessage] = useState("");
+    const {dayResult, statistics } = useStatistics();
 
     const [guesses, setGuesses] = useState([]);
     const [activeGuess, setActiveGuess] = useState(0);    
@@ -39,16 +41,6 @@ export default function Game() {
         }
         calendar[(new Date()).toISOString().split('T')[0]] = result;
         localStorage.setItem('calendar', JSON.stringify(calendar));
-    }
-
-    const getDayResult = () => {
-        var calendar = localStorage.getItem("calendar");
-        if(!calendar){
-            return null;
-        }else{
-            calendar = JSON.parse(calendar);
-            return calendar[(new Date()).toISOString().split('T')[0]];
-        }
     }
 
     const handleWin = () => {
@@ -138,22 +130,23 @@ export default function Game() {
     }, [checkKeyPress]);
 
     useEffect(() => {
-        var dayResult = getDayResult();
         if(dayResult){
             setStatisticsOpen(true);
             return;
         }
-        var userUserdata = localStorage.getItem("guesses");
-        if(!userUserdata){
+    }, [dayResult]);
+
+    useEffect(() => {
+        var helpshown = localStorage.getItem("helpshown");
+        if(!helpshown){
             setHelpOpen(true);
+            localStorage.setItem("helpshown", true)
         }
-    }, []);
+    }, []);   
 
     return (
         // SAVE STATE
-        // GAME OVER SCREEN, STREAK
         // Google analytics
-        // stoppa f5
         // github
         <Container maxWidth="md" sx={{height: '100%', display: 'flex', flexFlow: 'column'}} disableGutters="true" >
             <TopAppBar helpOpen={helpOpen} statisticsOpen={statisticsOpen} />

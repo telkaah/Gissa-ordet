@@ -86,14 +86,11 @@ export default function HelpDialog(props) {
                 <li>Bokstäverna <b>E</b> och <b>L</b>  finns med i ordet men är på fel plats</li>
               </ul>
             </Typography>
-          
-            
-
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} autoFocus>
-            Stäng
+          <Button color="primary" variant="contained" onClick={handleClose} autoFocus>
+            Spela
           </Button>
         </DialogActions>
       </Dialog>
