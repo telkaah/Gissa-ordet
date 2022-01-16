@@ -81,8 +81,8 @@ export default function Game() {
             return;
         }  
         setGuesses(oldArray => [...oldArray, guess]);    
-        setGuess("");
         setActiveGuess(activeGuess + 1);
+        setGuess("");
     }
 
     const checkKeyPress = useCallback((e) => {
@@ -94,7 +94,7 @@ export default function Game() {
         }else if(usedkeys.includes(key)){
             addLetter(key);
         }
-    },[guess, handleGuess, handleDelete, addLetter]);
+    },[handleGuess, handleDelete, addLetter]);
     
     useEffect(() => {
         window.addEventListener("keydown", checkKeyPress);

@@ -18,13 +18,10 @@ const defaultLayout = () => {
 export default function Guess(props) {
     const {index, guess, guesses} = props;
     const [letters, setLetters] = useState(defaultLayout); 
-    const [active, setActive] = useState(); 
     var {answer} = useAnswer();
 
     useEffect(()=>{
         if(guesses){
-            setActive(guesses.length === index);          
-
             if(guesses.length > index){
                 var result = [];
                 for (var i = 0; i < guesses[index].length; i++) {
@@ -43,7 +40,8 @@ export default function Guess(props) {
                     items.push(<Letterbox key={i} color={result[i]} active={guesses.length === index} letter={letter} />)
                 }       
                 setLetters(items);         
-            }else
+            }
+            else
             {
                 let items = [];
                 for (let i = 0; i < 5; i++) {
@@ -55,7 +53,7 @@ export default function Guess(props) {
     },[guesses, index, answer])
 
     useEffect(()=>{
-        if(active){
+        if(guesses.length === index){
             let items = [];
             for (let i = 0; i < 5; i++) {
                 var letter = guess?.length > i && guess.charAt(i);
@@ -63,7 +61,7 @@ export default function Guess(props) {
             }
             setLetters(items);
         }
-    },[guess, active])
+    },[guess, guesses, index])
 
     return (
         <Stack direction="row" spacing={1} sx={{mt:1, width:'100%', justifyContent:'center'}}>
