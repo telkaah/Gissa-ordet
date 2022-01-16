@@ -1,5 +1,5 @@
 import LeaderboardIcon from '@mui/icons-material/Leaderboard';
-import {  Box, Divider, Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -13,7 +13,7 @@ import { useStatistics } from '../hooks/useStatistics';
 export default function StatsDialog(props) {
   const {statisticsOpen} = props;
   const [open, setOpen] = useState(false);
-  const {dayResult, statistics, played, won, streak } = useStatistics();
+  const {dayResult, statistics, played, won } = useStatistics();
   const { answer } = useAnswer();
 
   const handleClickOpen = () => {

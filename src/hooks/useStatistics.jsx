@@ -5,7 +5,7 @@ export const useStatistics = () => {
     const [statistics, setStatistics] = useState();
     const [played, setPlayed] = useState();
     const [won, setWon] = useState();
-    const [streak, setStreak] = useState();
+    const [prevguesses, setPrevguesses] = useState();
   
     const updateValues = () =>{
         var calendar = localStorage.getItem("calendar");
@@ -14,6 +14,7 @@ export const useStatistics = () => {
             setStatistics(calendar);
             setDayResult(calendar[(new Date()).toISOString().split('T')[0]]);
             setPlayed(Object.keys(calendar)?.length);
+
             var wins = 0;
             Object.keys(calendar).forEach(function(key) {
                 if(calendar[key][0] === "WIN"){
@@ -21,13 +22,19 @@ export const useStatistics = () => {
                 }
             });
             setWon(wins);
-            var streak = 0;
+
+            var guesses = {};
             Object.keys(calendar).forEach(function(key) {
                 if(calendar[key][0]  === "WIN"){
-                    streak = streak + 1;
+                    var tries = calendar[key][1];
+                    if(!guesses[tries]){
+                        guesses[tries] = 1;
+                    }else{
+                        guesses[tries] = guesses[tries] + 1;
+                    }
                 }
             });
-            setStreak(streak);
+            setPrevguesses(guesses);
         }else{
             setStatistics();
             setDayResult();
@@ -48,5 +55,5 @@ export const useStatistics = () => {
           }        
     }, []);
   
-    return { dayResult, statistics, played, won, streak };
+    return { dayResult, statistics, played, won, prevguesses };
   };

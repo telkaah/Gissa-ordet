@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import dictionary from '../dictionary.json';
 var seedrandom = require('seedrandom');
 
@@ -10,7 +10,7 @@ export const useAnswer = () => {
     useEffect(() => {
         var newAnswer = Math.floor(random() * dictionary.length);
         setAnswer(dictionary[newAnswer].toUpperCase());
-    }, []);
+    }, [random]);
   
     return { answer };
   };

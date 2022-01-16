@@ -1,8 +1,6 @@
 import { Paper } from '@mui/material';
-import { createTheme, styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import * as React from 'react';
-
-const theme = createTheme();
 
 const EnterLayout = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,

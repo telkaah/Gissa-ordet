@@ -1,6 +1,6 @@
 import { Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import {React, useEffect} from 'react';
+import { React } from 'react';
 
 const KeyLayout = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -14,7 +14,7 @@ const KeyLayout = styled(Paper)(({ theme }) => ({
   }));
 
 export default function Key(props) {
-    const {keyResult, onClick, letter, ...other} = props;
+    const {keyResult, onClick, letter } = props;
 
     return (
       <KeyLayout onClick={()=>{onClick(letter.toUpperCase())}}

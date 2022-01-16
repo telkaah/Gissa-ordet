@@ -1,5 +1,5 @@
 import Snackbar from '@mui/material/Snackbar';
-import {React, useEffect, useState} from 'react';
+import { React } from 'react';
 
 export default function Message(props) {
     const vertical = 'top';

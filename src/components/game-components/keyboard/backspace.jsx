@@ -1,6 +1,5 @@
 import { Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import * as React from 'react';
 
 const BackspaceLayout = styled(Paper)(({ theme }) => ({

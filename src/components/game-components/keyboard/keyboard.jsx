@@ -1,12 +1,33 @@
-import {Box,Container,Paper, Stack} from '@mui/material';
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import Key from './key';
+import { Box, Stack } from '@mui/material';
+import { React, useEffect, useState } from 'react';
+import { useAnswer } from '../../../hooks/useAnswer';
+import Backspace from './backspace';
 import Enter from './enter';
-import Backspace from './backspace'
+import Key from './key';
 
 export default function Keyboard(props) {
-    const {onClick, onDelete, onGuess, keyResult} = props;
+    const {onClick, onDelete, onGuess, guesses} = props;
+    const [keyResult, setKeyResult] = useState({});
+    var {answer} = useAnswer();
+
+    useEffect(() => {
+        if(guesses?.length > 0){
+            var result = {};
+            guesses.forEach(guess=>{
+                for (var i = 0; i < guess.length; i++) {
+                    if(guess.charAt(i) === answer.charAt(i)){
+                        result[guess.charAt(i)] = 'correct';
+                    }else if(answer.indexOf(guess.charAt(i)) === -1){
+                        result[guess.charAt(i)] = 'wrong';
+                    }else{
+                        result[guess.charAt(i)] = 'near';
+                    }        
+                } 
+            })
+ 
+            setKeyResult(result);
+        }
+    }, [guesses, answer]);
 
     return (
         <Box sx={{ userSelect: "none", m:1 }}>
