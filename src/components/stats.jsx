@@ -9,6 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import { React, useEffect, useState } from 'react';
 import { useAnswer } from '../hooks/useAnswer';
 import { useStatistics } from '../hooks/useStatistics';
+import { Fireworks } from '@fireworks-js/react'
 
 export default function StatsDialog(props) {
   const {statisticsOpen} = props;
@@ -61,8 +62,28 @@ export default function StatsDialog(props) {
                     </Typography>
                     :<>Tyvärr klarade du inte dagens ord</>
                 }
-                <Typography variant="body1">Dagens ord var: <b>{answer}</b></Typography>
-                Imorgon kommer ett nytt ord!
+                <Typography variant="body1" mt="10px">Dagens ord var: <b>{answer}</b></Typography>
+                <a href={"https://svenska.se/saol/?sok=" + answer} target="_blank">Läs mer om dagens ord här</a>
+                <Typography variant="body1" mt="10px">Imorgon kommer ett nytt ord!</Typography>
+                {
+                  (dayResult[0] === "WIN") &&
+                  <Fireworks
+                    options={{
+                      rocketsPoint: {
+                        min: 0,
+                        max: 100
+                      }
+                    }}
+                    style={{
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      position: 'fixed',
+                      pointerEvents: 'none'
+                    }}
+                    /> 
+                }
               </Box>
             }
             {

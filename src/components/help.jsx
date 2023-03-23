@@ -60,7 +60,7 @@ export default function HelpDialog(props) {
             <Typography variant="body1">
               <ul>
                   <li>
-                      Du har 6 försök på dig att gissa ordet
+                      Du har 5 försök på dig att gissa ordet
                   </li>
                   <li>
                       Varje gissning måste vara ett giltigt ord
