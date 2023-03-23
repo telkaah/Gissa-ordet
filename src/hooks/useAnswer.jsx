@@ -4,13 +4,24 @@ var seedrandom = require('seedrandom');
 
 export const useAnswer = () => {
     const [answer, setAnswer] = useState();
-    var today = new Date();
-    const random = seedrandom(today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate());
-  
-    useEffect(() => {
+
+    const updateAnswer = () =>{
+        var today = new Date();
+        let random = seedrandom(today.getFullYear()+'-'+(today.getMonth())+'-'+today.getDate());
         var newAnswer = Math.floor(random() * dictionary.length);
         setAnswer(dictionary[newAnswer].toUpperCase());
-    }, [random]);
+    }
+
+    useEffect(() => {
+        const interval = setInterval(
+            () => updateAnswer(),
+            1000
+          );
+      
+          return () => {
+            clearInterval(interval);
+          }        
+    }, []);
   
     return { answer };
   };

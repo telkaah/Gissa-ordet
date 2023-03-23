@@ -5,7 +5,7 @@ export const useDate = () => {
   
     const updateDate = () =>{
         var today = new Date();
-        setDate(today.getFullYear()+'-'+(today.getMonth())+'-'+today.getDate())
+        setDate((new Date()).toISOString().split('T')[0]);
     }
 
     useEffect(() => {

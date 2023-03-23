@@ -13,9 +13,9 @@ export default function TopAppBar(props) {
         <AppBar position="static">
           <Toolbar>
             <HelpDialog helpOpen={helpOpen} />
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1, textAlign:'center' }}>
-              Gissa ordet
-            </Typography>
+            <Box sx={{ flexGrow: 1, textAlign:'center' }}>
+              <img src="./logo.png" alt="Gissa Ordet" height="45px" />
+            </Box>
             <Box>
                 <StatsDialog statisticsOpen={statisticsOpen} />
             </Box>
